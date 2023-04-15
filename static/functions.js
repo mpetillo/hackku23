@@ -54,3 +54,18 @@ function callJSONFiles(){
         console.error(error);
     });
 } 
+
+//A function to test the containers and return selected items
+// Can be modified later to return info that needs to be passed to APIs
+function printSelected(container_name) {
+    const container = document.getElementById(container_name);
+    const checkboxes = container.getElementsByTagName("input");
+
+    let selected = []
+    for (i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+            selected.push(checkboxes[i].value);
+        }
+    }
+    console.log("Selected: " + selected.join(", "));
+}
