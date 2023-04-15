@@ -1,5 +1,9 @@
 from flask import Flask, render_template, url_for, jsonify
+from secrets import Keys
 import json
+
+keys = Keys()
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -13,6 +17,10 @@ def recipes():
 @app.route('/info')
 def info():
     return render_template('info.html')
+
+@app.route('/generated')
+def generated():
+    return render_template('show_recipes.html')
 
 @app.route('/API/GetDropDownConfigurations/', methods=['GET'])
 def configureDropDowns():

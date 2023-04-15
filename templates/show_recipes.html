@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <title>temporary text</title>
+
+        <link rel="stylesheet" type="text/css" href="../static/style.css">
+        <h1>Twilio Test</h1>
+    </head>
+
+    <body>
+        <script type="text/javascript" src="{{ url_for('static', filename='twilio.js') }}"></script>
+        <p>Enter a phone number (XXX-XXX-XXXX)<input type="text" id="phonenum"></p> 
+        <button onclick="sendSMS()">Send SMS</button>
+    </body>
+
+
+</html>
