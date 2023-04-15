@@ -28,15 +28,17 @@
         <h3>Let's see what we can do for you.</h3>
         <form>
             <p>What's your budget? (A whole number, please!)<input type="text" id="budget" name="Budget amount"></p>
-            What ingredents do you currently have? (We assume you have salt, pepper, and water.)
-            Do you have any food allergies or intolerences?
-            What's your zip-code? (We do not retain this data!)<input type="text" id="zipcode" name="Zip Code">
+            <p>What's your zip-code? (We do not retain this data!)<input type="text" id="zipcode" name="Zip Code"></p>
         </form>
         <script type="text/javascript" src="{{ url_for('static', filename='functions.js') }}"></script>
-        <div id="cuisine-container"></div>
-        <div id="diets-container"></div>
-        <div id="ingredients-container"></div>
-        <div id="intolerances-container"></div>
+        <h2 class="dropdown-header" onclick="toggleDropdown('cuisine-container')">Which Cuisine Types are you in the mood for today?</h2>
+        <div id="cuisine-container" class="dropdown-content"></div><br>
+        <h2 class="dropdown-header" onclick="toggleDropdown('diets-container')">Which Diets do you follow?</h2>
+        <div id="diets-container" class="dropdown-content"></div><br>
+        <h2 class="dropdown-header" onclick="toggleDropdown('ingredients-container')">What Ingredients do you have?</h2>
+        <div id="ingredients-container" class="dropdown-content"></div><br>
+        <h2 class="dropdown-header" onclick="toggleDropdown('intolerances-container')">What Intolerances do you have?</h2>
+        <div id="intolerances-container" class="dropdown-content"></div><br>
         <script type="text/javascript">window.onload = function() { callJSONFiles(); };</script>
         <button onclick="printSelected('cuisine-container')">Print Selected Cuisine</button>
         <button onclick="printSelected('diets-container')">Print Selected Diets</button>

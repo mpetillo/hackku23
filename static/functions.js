@@ -1,6 +1,6 @@
 function createCuisine(cuisine){
     const container = document.getElementById("cuisine-container");
-    let html = "<h3>Which Cuisine Types are you in the mood for today?</h3>";
+    let html = "";
     for (i = 0; i < cuisine["cuisinetypes"].length; i++){
         html += '<input type="checkbox" id="'+cuisine["cuisinetypes"][i]+'" value="'+cuisine["cuisinetypes"][i]+'">';
         html += "<label>"+cuisine["cuisinetypes"][i]+"</label>";
@@ -10,7 +10,7 @@ function createCuisine(cuisine){
 
 function createDiets(diets){
     const container = document.getElementById("diets-container");
-    let html = "<h3>Which Diets do you follow?</h3>";
+    let html = "";
     for (i = 0; i < diets["diets"].length; i++){
         html += '<input type="checkbox" id="'+diets["diets"][i]+'" value="'+diets["diets"][i]+'">';
         html += "<label>"+diets["diets"][i]+"</label>";
@@ -21,7 +21,7 @@ function createDiets(diets){
 
 function createIngredients(ingredients){
     const container = document.getElementById("ingredients-container");
-    let html = "<h3>Which Ingredients would you like to add?</h3>";
+    let html = "<h3>(Water, Salt, Pepper are assumed)</h3>";
     for (i = 0; i < ingredients["short"].length; i++){
         html += '<input type="checkbox" id="'+ingredients["short"][i]+'" value="'+ingredients["short"][i]+'">';
         html += "<label>"+ingredients["short"][i]+"</label>";
@@ -31,7 +31,7 @@ function createIngredients(ingredients){
 
 function createIntolerances(intolerances){
     const container = document.getElementById("intolerances-container");
-    let html = "<h3>What Intolerances do you have?</h3>";
+    let html = "";
     for (i = 0; i < intolerances["intolerances"].length; i++){
         html += '<input type="checkbox" id="'+intolerances["intolerances"][i]+'" value="'+intolerances["intolerances"][i]+'">';
         html += "<label>"+intolerances["intolerances"][i]+"</label>";
@@ -52,10 +52,8 @@ function callJSONFiles(){
     })
         .catch(error => {
         console.error(error);
-    }); 
+    });
 } 
-
-
 
 //A function to test the containers and return selected items
 // Can be modified later to return info that needs to be passed to APIs
@@ -71,3 +69,10 @@ function printSelected(container_name) {
     }
     console.log("Selected: " + selected.join(", "));
 }
+
+//toggle dropdown for selection options
+function toggleDropdown(containerId) {
+    const container = document.getElementById(containerId);
+    container.style.display = (container.style.display === "block") ? "none" : "block";
+}
+

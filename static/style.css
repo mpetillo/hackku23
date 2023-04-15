@@ -37,3 +37,18 @@ body {background-color: #c5fcd5;
     background-color: green;
     color: white;
 }
+
+.dropdown-content {
+    display: none;
+}
+
+.dropdown-header {
+    display: inline-block;
+    border: 1px solid black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+
