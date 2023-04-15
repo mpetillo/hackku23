@@ -1,31 +1,71 @@
-function createCuisine(cuisineJSON){
-    const cuisine = JSON.parse(cuisineJSON);
-    document.write("<h3>Which Cuisine Types are you in the mood for today?</h3>");
+function createCuisine(cuisine){
+    const container = document.getElementById("cuisine-container");
+    let html = "<h3>Which Cuisine Types are you in the mood for today?</h3>";
     for (i = 0; i < cuisine["cuisinetypes"].length; i++){
-        document.write('<input type="checkbox" id="'+cuisine["cuisinetypes"][i]+'" value="'+cuisine["cuisinetypes"][i]+'"');
-        document.write("<label>"+cuisine["cuisinetypes"][i]+"</label>");
+        html += '<input type="checkbox" id="'+cuisine["cuisinetypes"][i]+'" value="'+cuisine["cuisinetypes"][i]+'">';
+        html += "<label>"+cuisine["cuisinetypes"][i]+"</label>";
     }
+    container.innerHTML += html;
 }
 
-function createDiets(dietsJSON){
-    const cuisine = JSON.parse(cuisineJSON);
-    document.write("<h3>Which Cuisine Types are you in the mood for today?</h3>");
-    for (i = 0; i < cuisine["cuisinetypes"].length; i++){
-        document.write('<input type="checkbox" id="'+cuisine["cuisinetypes"][i]+'" value="'+cuisine["cuisinetypes"][i]+'"');
-        document.write("<label>"+cuisine["cuisinetypes"][i]+"</label>"); //cuisine needs to be replaced with diets, etc etc
+function createDiets(diets){
+    const container = document.getElementById("diets-container");
+    let html = "<h3>Which Diets do you follow?</h3>";
+    for (i = 0; i < diets["diets"].length; i++){
+        html += '<input type="checkbox" id="'+diets["diets"][i]+'" value="'+diets["diets"][i]+'">';
+        html += "<label>"+diets["diets"][i]+"</label>";
     }
+    container.innerHTML += html;
 }
 
-function createIngredients(ingredientsJSON){
 
+function createIngredients(ingredients){
+    const container = document.getElementById("ingredients-container");
+    let html = "<h3>Which Ingredients would you like to add?</h3>";
+    for (i = 0; i < ingredients["short"].length; i++){
+        html += '<input type="checkbox" id="'+ingredients["short"][i]+'" value="'+ingredients["short"][i]+'">';
+        html += "<label>"+ingredients["short"][i]+"</label>";
+    }
+    container.innerHTML += html;
 }
 
-function createIntolerences(intolerencesJSON){
+function createIntolerances(intolerances){
+    const container = document.getElementById("intolerances-container");
+    let html = "<h3>What Intolerances do you have?</h3>";
+    for (i = 0; i < intolerances["intolerances"].length; i++){
+        html += '<input type="checkbox" id="'+intolerances["intolerances"][i]+'" value="'+intolerances["intolerances"][i]+'">';
+        html += "<label>"+intolerances["intolerances"][i]+"</label>";
+    }
+    container.innerHTML += html;
 
 }
 
 function callJSONFiles(){
     console.log("POP!");
-    let apilist = fetch('/API/GetDropDownConfigurations', {Method:'GET'});
-    createCuisine(apilist[0]);
+    fetch('/API/GetDropDownConfigurations', { method: 'GET' })
+    .then(response => response.json())
+    .then(data => {
+        createCuisine(data.cuisine);
+        createDiets(data.diets);
+        createIngredients(data.ingredients);
+        createIntolerances(data.intolerances);
+    })
+        .catch(error => {
+        console.error(error);
+    });
+} 
+
+//A function to test the containers and return selected items
+// Can be modified later to return info that needs to be passed to APIs
+function printSelected(container_name) {
+    const container = document.getElementById(container_name);
+    const checkboxes = container.getElementsByTagName("input");
+
+    let selected = []
+    for (i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+            selected.push(checkboxes[i].value);
+        }
+    }
+    console.log("Selected: " + selected.join(", "));
 }
