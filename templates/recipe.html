@@ -18,16 +18,22 @@
         </div>
 
         <div class="topnav">
-            <a href="{{ url_for('index') }}">Home</a>
-            <a class="active" href="{{ url_for('recipes') }}">Recipe Finder</a>
-            <a href="{{ url_for('info') }}">About Us</a>
-
+            <a class="active" href="index.html">Home</a>
+            <a href="recipe.html">Recipe Finder</a>
+            <a href="info.html">About Us</a>
 
         </div>
 
-        <h1></h1>
-
+        <h1>Hey! You need a recipe or two?</h1>
+        <h3>Let's see what we can do for you.</h3>
+        <form>
+            <p>What's your budget? (A whole number, please!)<input type="text" id="budget" name="Budget amount"></p>
+            What ingredents do you currently have? (We assume you have salt, pepper, and water.)
+            Do you have any food allergies or intolerences?
+            What's your zip-code? (We do not retain this data!)<input type="text" id="zipcode" name="Zip Code">
+        </form>
+        <script type="text/javascript" src="../static/functions.js">
+        callJSONFiles()
+        </script>
     </body>
-
-
 </html>
