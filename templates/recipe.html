@@ -18,9 +18,9 @@
         </div>
 
         <div class="topnav">
-            <a class="active" href="index.html">Home</a>
-            <a href="recipe.html">Recipe Finder</a>
-            <a href="info.html">About Us</a>
+            <a href="/">Home</a>
+            <a class="active" href="/recipes">Recipe Finder</a>
+            <a href="/info">About Us</a>
 
         </div>
 
@@ -32,8 +32,7 @@
             Do you have any food allergies or intolerences?
             What's your zip-code? (We do not retain this data!)<input type="text" id="zipcode" name="Zip Code">
         </form>
-        <script type="text/javascript" src="../static/functions.js">
-        callJSONFiles()
-        </script>
+        <script type="text/javascript" src="{{ url_for('static', filename='functions.js') }}"></script>
+        <button onclick="callJSONFiles()">callJSONFiles</button>
     </body>
 </html>

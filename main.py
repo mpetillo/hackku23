@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, jsonify
 import json
 app = Flask(__name__)
 
@@ -24,8 +24,10 @@ def configureDropDowns():
     with open("ingredients.json", "r") as f:
         ingredients = json.load(f)
     with open("intolerences.json", "r") as f:
-        intolerences = json.load(f)
-    return [cuisine, diets, ingredients, intolerences]
+        intolerances = json.load(f)
+    response = jsonify({'cuisine': cuisine, 'diets': diets, 'ingredients': ingredients, 'intolerances': intolerances})
+    response.status_code = 200
+    return response
 
 if __name__ == '__main__':
     app.run()
