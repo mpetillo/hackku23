@@ -12,7 +12,7 @@ function createDiets(dietsJSON){
     document.write("<h3>Which Cuisine Types are you in the mood for today?</h3>");
     for (i = 0; i < cuisine["cuisinetypes"].length; i++){
         document.write('<input type="checkbox" id="'+cuisine["cuisinetypes"][i]+'" value="'+cuisine["cuisinetypes"][i]+'"');
-        document.write("<label>"+cuisine["cuisinetypes"][i]+"</label>");
+        document.write("<label>"+cuisine["cuisinetypes"][i]+"</label>"); //cuisine needs to be replaced with diets, etc etc
     }
 }
 
