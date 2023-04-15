@@ -23,7 +23,7 @@ def configureDropDowns():
         diets = json.load(f)
     with open("ingredients.json", "r") as f:
         ingredients = json.load(f)
-    with open("intolerences.json", "r") as f:
+    with open("intolerances.json", "r") as f:
         intolerances = json.load(f)
     response = jsonify({'cuisine': cuisine, 'diets': diets, 'ingredients': ingredients, 'intolerances': intolerances})
     response.status_code = 200

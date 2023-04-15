@@ -33,6 +33,10 @@
             What's your zip-code? (We do not retain this data!)<input type="text" id="zipcode" name="Zip Code">
         </form>
         <script type="text/javascript" src="{{ url_for('static', filename='functions.js') }}"></script>
-        <button onclick="callJSONFiles()">callJSONFiles</button>
+        <div id="cuisine-container"></div>
+        <div id="diets-container"></div>
+        <div id="ingredients-container"></div>
+        <div id="intolerances-container"></div>
+        <script type="text/javascript">window.onload = function() { callJSONFiles(); };</script>
     </body>
 </html>
