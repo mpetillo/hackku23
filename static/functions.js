@@ -52,8 +52,10 @@ function callJSONFiles(){
     })
         .catch(error => {
         console.error(error);
-    });
+    }); 
 } 
+
+
 
 //A function to test the containers and return selected items
 // Can be modified later to return info that needs to be passed to APIs
