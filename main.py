@@ -1,5 +1,6 @@
-from flask import Flask, render_template, url_for, jsonify
+from flask import Flask, render_template, url_for, jsonify, request
 import json
+import externalfunctions
 app = Flask(__name__)
 
 @app.route('/')
@@ -28,6 +29,11 @@ def configureDropDowns():
     response = jsonify({'cuisine': cuisine, 'diets': diets, 'ingredients': ingredients, 'intolerances': intolerances})
     response.status_code = 200
     return response
+
+@app.route('/API/CheckForRecipes', methods=['POST'])
+def checkForRecipes():
+    jsondata = request.json
+    
 
 if __name__ == '__main__':
     app.run()
