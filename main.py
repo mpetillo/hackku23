@@ -33,13 +33,12 @@ def configureDropDowns():
 
 @app.route('/API/CheckForRecipes', methods=['POST'])
 def checkForRecipes():
-    if request.content_type != 'application/json':
-        response = ""
-        response.status_code = 400
-        return response
+    data = request.json
+    if data is None:
+        return '400'
     else:
-        data = request.get_data()
-        print(data)
+        
+
 
 if __name__ == '__main__':
     app.run()

@@ -81,7 +81,7 @@ function jsonSelected(){
     const checkboxes2 = diets.getElementsByTagName("input");
     const checkboxes3 = ingredients.getElementsByTagName("input");
     const checkboxes4 = intolerances.getElementsByTagName("input");
-    const temptemp = [];
+    let temptemp = [];
     //each for loop - because else it doesn't work! in order: cuisine, diets, ingredients, intolerances 
     for (j = 0; j < checkboxes1.length; j++){
         if (checkboxes1[j].checked) {
@@ -110,7 +110,6 @@ function jsonSelected(){
         }
     }
     temp.push(temptemp);
-    
     const jsonlist = {'cuisine':temp[0],'diets':temp[1],'ingredients':temp[2],'intolerances':temp[3]};
     return jsonlist;
 }
