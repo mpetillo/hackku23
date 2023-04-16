@@ -1,5 +1,7 @@
-from flask import Flask, render_template, url_for, jsonify
+from flask import Flask, request, render_template, url_for, jsonify
 from secrets import Keys
+from sendSMS import send_sms
+
 import json
 
 keys = Keys()
@@ -36,6 +38,14 @@ def configureDropDowns():
     response = jsonify({'cuisine': cuisine, 'diets': diets, 'ingredients': ingredients, 'intolerances': intolerances})
     response.status_code = 200
     return response
+
+@app.route('/TWILIO/SendMessage/', methods=['POST'])
+def sendMessage():
+    phone_number = request.form['phone_number']
+    message = request.form['selected_recipe']
+    print(message)
+    #send_sms(phone_number,"test")
+    return "Message sent successfully"
 
 if __name__ == '__main__':
     app.run()

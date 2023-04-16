@@ -6,14 +6,70 @@
         <title>temporary text</title>
 
         <link rel="stylesheet" type="text/css" href="../static/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='recipe_table.js') }}"></script>
+
         <h1>Twilio Test</h1>
     </head>
 
     <body>
-        <script type="text/javascript" src="{{ url_for('static', filename='twilio.js') }}"></script>
-        <p>Enter a phone number (XXX-XXX-XXXX)<input type="text" id="phonenum"></p> 
-        <button onclick="sendSMS()">Send SMS</button>
+        <div id="recipe-container"></div>
+
+        <script>
+        var items = [
+            {"title": "Item 1", "link": "https://www.example.com/item1"},
+            {"title": "Item 2", "link": "https://www.example.com/item2"},
+            {"title": "Item 3", "link": "https://www.example.com/item3"}
+        ];
+        
+        // Call a function to load the items when the page loads
+        window.onload = function() {
+            loadRecipes(items);
+        };
+        </script>
+
+        <form>
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" id="phone_number" name="phone_number">
+        <br><br>
+        <button type="button" id="submit">Submit</button>
+        </form>
+        
+        <script>
+        $(document).ready(function() {
+            $('#submit').click(function() {
+                var selectedRecipe = getSelectedRecipe();
+
+                var phoneNumber = $('#phone_number').val();
+                // Strip all non-digit characters
+                phoneNumber = phoneNumber.replace(/\D/g, '');
+                // Check if the resulting string is exactly 10 digits
+                if (phoneNumber.length !== 10) {
+                    alert('Please enter a valid 10-digit phone number');
+                    return;
+                }
+                if (selectedRecipe === null) {
+                    alert('Please select a recipe to send via SMS');
+                    return;
+                }
+                var data = {
+                    phone_number: phoneNumber,
+                    selected_recipe: selectedRecipe
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/TWILIO/SendMessage/',
+                    data: data,
+                    success: function(data) {
+                        // Do Nothing
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error: ' + xhr.responseText);
+                    }
+                });
+            });
+        });
+        </script>
     </body>
-
-
 </html>
