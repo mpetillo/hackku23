@@ -1,2 +1,0 @@
-program get/post requests into flask (we will program the whole thing give it a minute lol)
-
