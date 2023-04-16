@@ -76,6 +76,8 @@ function jsonSelected(){
     const diets = document.getElementById("diets-container");
     const ingredients = document.getElementById("ingredients-container");
     const intolerances = document.getElementById("intolerances-container");
+    const zipcode = document.getElementById("zipcode");
+    const budget = document.getElementById("budget");
     const temp = [];
     const checkboxes1 = cuisine.getElementsByTagName("input");
     const checkboxes2 = diets.getElementsByTagName("input");
@@ -110,7 +112,7 @@ function jsonSelected(){
         }
     }
     temp.push(temptemp);
-    const jsonlist = {'cuisine':temp[0],'diets':temp[1],'ingredients':temp[2],'intolerances':temp[3]};
+    const jsonlist = {'cuisine':temp[0],'diets':temp[1],'ingredients':temp[2],'intolerances':temp[3],'budget':budget.value,'zipcode':zipcode.value};
     return jsonlist;
 }
 
@@ -118,7 +120,20 @@ function jsonSelected(){
 function submitPreferences(){
     console.log("POP!")
     const jsonlist = jsonSelected();
-    fetch('/API/CheckForRecipes', { method: 'POST' })
+    fetch('/API/CheckForRecipes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jsonlist)
+      })
+    .then(response => {
+        if (response.ok) {
+          console.log("All ok!")
+        } else {
+          console.log("NOPE")
+        }
+      })
 
 }
 

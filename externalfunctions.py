@@ -25,11 +25,12 @@ def getPriceTotal(zipcode, foodlist):
         'Accept':'application/json',
         'Authorization': 'Bearer '+ requests.post(url, headers=headers, data=payload).json()["access_token"]
     }
-    responseLocations = requests.get('https://api.kroger.com/v1/locations?filter.zipCode.near=66046', headers=headersLocationFood)
+    responseLocations = requests.get(f'https://api.kroger.com/v1/locations?filter.zipCode.near={zipcode}', headers=headersLocationFood)
     nearestStore = responseLocations.json()['data'][0]['locationId']
     total = 0.00
-    for i in foodlist:
-        temp = i.replace(" ", "%20")
+    for i in foodlist:  
+        temp = i['name']
+        temp2 = temp.replace(" ", "%20")
         fooditem = requests.get(f"https://api.kroger.com/v1/products?filter.locationId={nearestStore}&filter.term={temp}", headers=headersLocationFood)
         fooditem = fooditem.json()['data']['items']['price']
         if 'promo' in fooditem and fooditem['promo'] != 0:
