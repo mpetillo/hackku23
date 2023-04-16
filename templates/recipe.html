@@ -3,28 +3,33 @@
 
     <head>
 
-        <title>temporary text</title>
+        <title>BudgetBite</title>
 
         <link rel="stylesheet" type="text/css" href="../static/style.css">
 
+        <link rel="icon" type="image/x-icon" href="/static/budgetbite.png">
     </head>
 
     <body>
 
         <div class="bar">
 
-            <p>Recipe Finder</p>
+            <p class="name">BudgetBite</p>
+
+            <p class="slogan">Budget-friendly meals, one bite at a time!</p>
 
         </div>
 
         <div class="topnav">
-            <a href="/">Home</a>
-            <a class="active" href="/recipes">Recipe Finder</a>
-            <a href="/info">About Us</a>
-
+            <a class="left" href="/">Home</a>
+            <a class="active left"href="/recipes">Recipe Finder</a>
+            <a class="left" href="/stores">Stores Nearby</a>
+            <a class="right" href="/info">About Us</a>
+            <a class="right"href="/contact">Contact US</a>
         </div>
 
         <h1>Hey! You need a recipe or two?</h1>
+        <hr/>
         <h3>Let's see what we can do for you.</h3>
         <form>
             <p>What's your budget? (A whole number, please!)<input type="text" id="budget" name="Budget amount"></p>
