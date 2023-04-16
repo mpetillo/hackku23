@@ -2,15 +2,12 @@ from flask import Flask, render_template, url_for, jsonify, request
 import requests
 import json
 import externalfunctions
-import os
-from dotenv import load_dotenv
+from secrets import Keys
 from sendSMS import send_sms
-from dotenv import load_dotenv
 
-load_dotenv()
 import json
 
-load_dotenv()
+keys = Keys()
 
 app = Flask(__name__)
 
@@ -38,10 +35,6 @@ def stores():
 def contact():
     return render_template('contact.html')
 
-@app.route('/static/budgetbite.png') 
-def send_file(budgetbite): 
-    return send_from_directory(app.upload_folder, budgetbite)
-
 @app.route('/API/GetDropDownConfigurations/', methods=['GET'])
 def configureDropDowns():
     cuisine, diets, ingredients, intolerances = {}, {}, {}, {}
@@ -63,10 +56,10 @@ def checkForRecipes():
     if data is None:
         return '400'
     else:
-        url = os.getenv('RAPID_API_RECIPE')
+        url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch"
         headers = {
-            "X-RapidAPI-Key": os.getenv('RAPID_API_KEY'),
-            "X-RapidAPI-Host": os.getenv('RAPID_API_RECIPE')
+            "X-RapidAPI-Key": "81953878c0mshfdb41f16e86865bp18a916jsn33156a295554",
+            "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
         }
         querystring = {"query":"the","instructionsRequired":"True","number":"50"}
         if "cuisine" in data:

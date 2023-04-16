@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <title>BudgetBite</title>
+
+        <link rel="stylesheet" type="text/css" href="../static/style.css">
+
+        <link rel="icon" type="image/x-icon" href="/static/budgetbite.png">
+
+    </head>
+
+    <body>
+
+        <div class="bar">
+
+            <p class="name">BudgetBite</p>
+
+            <p class="slogan">Budget-friendly meals, one bite at a time!</p>
+
+        </div>
+
+        <div class="topnav">
+                <a class="left" href="/">Home</a>
+                <a class="left"href="/recipes">Recipe Finder</a>
+                <a class="active left" href="/stores">Stores Nearby</a>
+                <a class="right" href="/info">About Us</a>
+                <a class="right"href="/contact">Contact US</a>
+        </div>
+
+        <h1>Looking for Nearby Stores?</h1>
+
+        <p>Here we have found some nearby supermarkets, grocery stores, and food banks within your current location!</p>
+
+        <br/>
+
+        <div id="map" class="map"></div>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDp5Qo0CpqMAJ1riQ9-q8zdzvrXX8h1_98&libraries=places"></script>
+            <script>
+                function initMap() {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(showMap);
+                    } else {
+                        alert("Geolocation is not supported by this browser.");
+                    }
+                }
+
+                function showMap(position) {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+
+                    const map = new google.maps.Map(document.getElementById("map"), {
+                        center: { lat, lng },
+                        zoom: 14,
+                    });
+
+                    const userMarker = new google.maps.Marker({
+                        map,
+                        position: { lat, lng },
+                        title: "Your Location",
+                        icon: {
+                        url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                        },
+                    });
+
+                    // Search for nearby grocery stores
+                    const groceryRequest = {
+                        location: { lat, lng },
+                        radius: 5000,
+                        types: ["grocery_or_supermarket"],
+                    };
+
+                    const groceryService = new google.maps.places.PlacesService(map);
+
+                    groceryService.nearbySearch(groceryRequest, (groceryResults, groceryStatus) => {
+                        if (groceryStatus === google.maps.places.PlacesServiceStatus.OK) {
+                        for (let i = 0; i < groceryResults.length; i++) {
+                            createMarker(groceryResults[i]);
+                        }
+                        }
+                    });
+
+                    // Search for nearby food banks
+                    const foodbankRequest = {
+                        location: { lat, lng },
+                        radius: 5000,
+                        keyword: "food bank",
+                    };
+
+                    const foodbankService = new google.maps.places.PlacesService(map);
+
+                    foodbankService.nearbySearch(foodbankRequest, (foodbankResults, foodbankStatus) => {
+                        if (foodbankStatus === google.maps.places.PlacesServiceStatus.OK) {
+                        for (let i = 0; i < foodbankResults.length; i++) {
+                            createMarker(foodbankResults[i]);
+                        }
+                        }
+                    });
+
+                    function createMarker(place) {
+                        const marker = new google.maps.Marker({
+                        map,
+                        position: place.geometry.location,
+                        title: place.name,
+                        });
+
+                        const infowindow = new google.maps.InfoWindow({
+                        content: place.name,
+                        });
+
+                        marker.addListener("click", () => {
+                        infowindow.open(map, marker);
+                        });
+                    }
+                    }
+
+                initMap()
+
+            </script>
+
+    </body>
+
+
+</html>

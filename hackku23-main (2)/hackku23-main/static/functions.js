@@ -41,7 +41,6 @@ function createIntolerances(intolerances){
 }
 
 function callJSONFiles(){
-    console.log("POP!");
     fetch('/API/GetDropDownConfigurations', { method: 'GET' })
     .then(response => response.json())
     .then(data => {
@@ -70,9 +69,76 @@ function printSelected(container_name) {
     console.log("Selected: " + selected.join(", "));
 }
 
+//helper function
+function jsonSelected(){
+    //define everything!
+    const cuisine = document.getElementById("cuisine-container");
+    const diets = document.getElementById("diets-container");
+    const ingredients = document.getElementById("ingredients-container");
+    const intolerances = document.getElementById("intolerances-container");
+    const zipcode = document.getElementById("zipcode");
+    const budget = document.getElementById("budget");
+    const temp = [];
+    const checkboxes1 = cuisine.getElementsByTagName("input");
+    const checkboxes2 = diets.getElementsByTagName("input");
+    const checkboxes3 = ingredients.getElementsByTagName("input");
+    const checkboxes4 = intolerances.getElementsByTagName("input");
+    let temptemp = [];
+    //each for loop - because else it doesn't work! in order: cuisine, diets, ingredients, intolerances 
+    for (j = 0; j < checkboxes1.length; j++){
+        if (checkboxes1[j].checked) {
+            temptemp.push(checkboxes1[j].value);
+        }
+    }
+    temp.push(temptemp)
+    temptemp = [];
+    for (j = 0; j < checkboxes2.length; j++){
+        if (checkboxes2[j].checked) {
+            temptemp.push(checkboxes2[j].value);
+        }
+    }
+    temp.push(temptemp)
+    temptemp = [];
+    for (j = 0; j < checkboxes3.length; j++){
+        if (checkboxes3[j].checked) {
+            temptemp.push(checkboxes3[j].value);
+        }
+    }
+    temp.push(temptemp)
+    temptemp = [];
+    for (j = 0; j < checkboxes4.length; j++){
+        if (checkboxes4[j].checked) {
+            temptemp.push(checkboxes4[j].value);
+        }
+    }
+    temp.push(temptemp);
+    const jsonlist = {'cuisine':temp[0],'diets':temp[1],'ingredients':temp[2],'intolerances':temp[3],'budget':budget.value,'zipcode':zipcode.value};
+    return jsonlist;
+}
+
+//specific usecase function for when submitting data on recipe.html
+function submitPreferences(){
+    console.log("POP!")
+    const jsonlist = jsonSelected();
+    fetch('/API/CheckForRecipes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jsonlist)
+      })
+    .then(response => {
+        if (response.ok) {
+          console.log("All ok!")
+        } else {
+          console.log("NOPE")
+        }
+      })
+
+}
+
 //toggle dropdown for selection options
 function toggleDropdown(containerId) {
     const container = document.getElementById(containerId);
     container.style.display = (container.style.display === "block") ? "none" : "block";
 }
-

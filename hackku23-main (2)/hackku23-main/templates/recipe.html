@@ -3,7 +3,7 @@
 
     <head>
 
-        <title>BudgetBite</title>
+        <title>temporary text</title>
 
         <link rel="stylesheet" type="text/css" href="../static/style.css">
 
@@ -13,18 +13,15 @@
 
         <div class="bar">
 
-            <p class="name">BudgetBite</p>
-
-            <p class="slogan">Budget-friendly meals, one bite at a time!</p>
+            <p>Recipe Finder</p>
 
         </div>
 
         <div class="topnav">
-            <a class="left" href="/">Home</a>
-            <a class="active left"href="/recipes">Recipe Finder</a>
-            <a class="left" href="/stores">Stores Nearby</a>
-            <a class="right" href="/info">About Us</a>
-            <a class="right"href="/contact">Contact US</a>
+            <a href="/">Home</a>
+            <a class="active" href="/recipes">Recipe Finder</a>
+            <a href="/info">About Us</a>
+
         </div>
 
         <h1>Hey! You need a recipe or two?</h1>
@@ -43,9 +40,6 @@
         <h2 class="dropdown-header" onclick="toggleDropdown('intolerances-container')">What Intolerances do you have?</h2>
         <div id="intolerances-container" class="dropdown-content"></div><br>
         <script type="text/javascript">window.onload = function() { callJSONFiles(); };</script>
-        <button onclick="printSelected('cuisine-container')">Print Selected Cuisine</button>
-        <button onclick="printSelected('diets-container')">Print Selected Diets</button>
-        <button onclick="printSelected('ingredients-container')">Print Selected Ingredients</button>
-        <button onclick="printSelected('intolerances-container')">Print Selected Intolerances</button>
+        <button onclick="submitPreferences()">Submit Choices</button>
     </body>
 </html>
