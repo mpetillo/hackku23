@@ -41,7 +41,6 @@ function createIntolerances(intolerances){
 }
 
 function callJSONFiles(){
-    console.log("POP!");
     fetch('/API/GetDropDownConfigurations', { method: 'GET' })
     .then(response => response.json())
     .then(data => {
@@ -70,9 +69,37 @@ function printSelected(container_name) {
     console.log("Selected: " + selected.join(", "));
 }
 
+//helper function
+function jsonSelected(){
+    const cuisine = document.getElementById("cuisine-container");
+    const diets = document.getElementById("diets-container");
+    const ingredients = document.getElementById("ingredients-container");
+    const intolerances = document.getElementById("intolerances-container");
+    const temp = []
+    const thelist = [cuisine, diets, ingredients, intolerances];
+    for (i in thelist){
+        const checkboxes = i.getElementsByTagName("input");
+        let temptemp = [];
+        for (j = 0; j < checkboxes.length; j++){
+            if (checkboxes[j].checked) {
+                temptemp.push(checkboxes[j].value);
+            }
+        }
+        temp.push(temptemp);
+    }
+    const jsonlist = {'cuisine':temp[0],'diets':temp[1],'ingredients':temp[2],'intolerances':temp[3]};
+    return jsonlist;
+}
+
+//specific usecase function for when submitting data on recipe.html
+function submitPreferences(){
+    const jsonlist = jsonSelected();
+    fetch()
+
+}
+
 //toggle dropdown for selection options
 function toggleDropdown(containerId) {
     const container = document.getElementById(containerId);
     container.style.display = (container.style.display === "block") ? "none" : "block";
 }
-
