@@ -43,7 +43,7 @@ def configureDropDowns():
 def sendMessage():
     phone_number = request.form['phone_number']
     message = request.form['selected_recipe']
-    print(message)
+    print(message) # delete this and uncomment next line when twilio tokens entered to secrets.py
     #send_sms(phone_number,"test")
     return "Message sent successfully"
 
