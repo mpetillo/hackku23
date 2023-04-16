@@ -38,4 +38,3 @@ def getPriceTotal(zipcode, foodlist):
             total += fooditem['regular']
 
     return total
-

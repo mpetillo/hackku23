@@ -1,4 +1,5 @@
 from flask import Flask, render_template, url_for, jsonify, request
+import requests
 import json
 import externalfunctions
 app = Flask(__name__)
@@ -17,7 +18,7 @@ def info():
 
 @app.route('/API/GetDropDownConfigurations/', methods=['GET'])
 def configureDropDowns():
-    cuisine, diets, ingredients, intolerences = {}, {}, {}, {}
+    cuisine, diets, ingredients, intolerances = {}, {}, {}, {}
     with open("cuisine.json", "r") as f:
         cuisine = json.load(f)
     with open("diets.json", "r") as f:
@@ -32,8 +33,13 @@ def configureDropDowns():
 
 @app.route('/API/CheckForRecipes', methods=['POST'])
 def checkForRecipes():
-    jsondata = request.json
-    
+    if request.content_type != 'application/json':
+        response = ""
+        response.status_code = 400
+        return response
+    else:
+        data = request.get_data()
+        print(data)
 
 if __name__ == '__main__':
     app.run()
