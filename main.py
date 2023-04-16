@@ -4,7 +4,9 @@ import json
 import externalfunctions
 from secrets import Keys
 from sendSMS import send_sms
+from dotenv import load_dotenv
 
+load_dotenv()
 import json
 
 keys = Keys()
