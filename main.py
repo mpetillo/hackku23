@@ -5,7 +5,6 @@ import externalfunctions
 import os
 from dotenv import load_dotenv
 from sendSMS import send_sms
-from dotenv import load_dotenv
 
 load_dotenv()
 import json
